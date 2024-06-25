@@ -27,3 +27,21 @@ gcdLog a b dlog
 
 gcdGetLog :: Integer -> Integer -> [(Integer,Integer)]
 gcdGetLog a b = toList (snd (gcdLog a b empty))
+
+
+-- BETTER
+
+emptyB :: DList a 
+emptyB = id
+
+snglB :: a -> DList a
+snglB = (:)
+
+appB :: DList a -> DList a -> DList a
+app = (.)
+
+fromListB :: [a] -> DList a
+fromListB = (++)
+
+toListB :: DList a -> [a]
+toListB = ($[]) 
