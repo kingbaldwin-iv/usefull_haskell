@@ -38,10 +38,21 @@ snglB :: a -> DList a
 snglB = (:)
 
 appB :: DList a -> DList a -> DList a
-app = (.)
+appB = (.)
 
 fromListB :: [a] -> DList a
 fromListB = (++)
 
 toListB :: DList a -> [a]
 toListB = ($[]) 
+
+gcdLogB :: Integer -> Integer -> DLog -> (Integer, DLog)
+gcdLogB a b dlog
+ | a == b = (a,log')
+ | a > b = gcdLog (a-b) b log'
+ | otherwise = gcdLog a (b-a) log'
+ where
+  log' = dlog `appB` snglB (a,b)
+  
+gcdGetLogB :: Integer -> Integer -> [(Integer,Integer)]
+gcdGetLogB a b = toList (snd (gcdLog a b emptyB))
