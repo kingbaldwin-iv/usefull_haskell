@@ -44,4 +44,4 @@ satProp prop = evil3 (run (propVars prop)) prop
   propVars = foldl (\x n -> if elem n x then x else n : x) [] . foldProp (\x -> [x]) id (++) (++)
 
 instance Show a => Show (Prop a) where
-  show = foldProp (\x -> show x) (\x -> "(Not " ++ x ++ ")") (\t -> curry (\x -> "(" ++ fst x ++ " && " ++ snd x ++ ")") t) (\t -> curry (\x -> "(" ++ fst x ++ " || " ++ snd x ++ ")") t) 
+  show = foldProp (\x -> show x) (\x -> "(Not " ++ x ++ ")") (\t x -> "(" ++ t ++ " && " ++ x ++ ")") (\x t -> "(" ++ x ++ " || " ++ t ++ ")") 
